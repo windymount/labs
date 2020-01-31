@@ -143,7 +143,7 @@ NOTES:
  *   Rating: 1
  */
 int bitXor(int x, int y) {
-  return 2;
+  return ~(~(~x & y) & ~(x & ~y));
 }
 /* 
  * tmin - return minimum two's complement integer 
@@ -152,8 +152,8 @@ int bitXor(int x, int y) {
  *   Rating: 1
  */
 int tmin(void) {
-
-  return 2;
+  int a = 1;
+  return a<<31;
 
 }
 //2
@@ -165,7 +165,8 @@ int tmin(void) {
  *   Rating: 1
  */
 int isTmax(int x) {
-  return 2;
+
+  return !(~x ^ (x + 1))+ !(x + 1) + ;
 }
 /* 
  * allOddBits - return 1 if all odd-numbered bits in word set to 1
@@ -176,7 +177,10 @@ int isTmax(int x) {
  *   Rating: 2
  */
 int allOddBits(int x) {
-  return 2;
+  int a = 0xAA;
+  a = a + (a << 8) + (a << 16) + (a<< 24 );
+  x = x | ~a;
+  return !(~x);
 }
 /* 
  * negate - return -x 
@@ -186,7 +190,7 @@ int allOddBits(int x) {
  *   Rating: 2
  */
 int negate(int x) {
-  return 2;
+  return x^(~(x ^(~x + 1)));
 }
 //3
 /* 
@@ -199,7 +203,12 @@ int negate(int x) {
  *   Rating: 3
  */
 int isAsciiDigit(int x) {
-  return 2;
+  int a = 0x30;
+  int b = 0x39;
+  a = a ^ (a<<1);
+  a = x + a;
+  b = b + (x ^ (x<<1));
+  return !(a>>31 + b>>31);
 }
 /* 
  * conditional - same as x ? y : z 
@@ -209,7 +218,8 @@ int isAsciiDigit(int x) {
  *   Rating: 3
  */
 int conditional(int x, int y, int z) {
-  return 2;
+  x = ((x^ (x<<1)) >>31) | (x >> 31);
+  return y & x + z & (~x);
 }
 /* 
  * isLessOrEqual - if x <= y  then return 1, else return 0 
@@ -219,7 +229,7 @@ int conditional(int x, int y, int z) {
  *   Rating: 3
  */
 int isLessOrEqual(int x, int y) {
-  return 2;
+  return (y + (x ^ (x<<1)));
 }
 //4
 /* 
@@ -231,7 +241,8 @@ int isLessOrEqual(int x, int y) {
  *   Rating: 4 
  */
 int logicalNeg(int x) {
-  return 2;
+  x = ((x^ (x<<1)) >>31) | (x >> 31);
+  return x^ (x<<1);
 }
 /* howManyBits - return the minimum number of bits required to represent x in
  *             two's complement
