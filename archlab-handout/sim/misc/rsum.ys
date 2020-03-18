@@ -1,0 +1,37 @@
+.pos 0x00
+irmovq stack, %rsp
+call main
+halt
+main:
+  irmovq $ele1, %rdi
+  call rsum_list
+  ret
+rsum_list:
+  andq %rdi, %rdi
+  jne L1
+  xorq %rax, %rax
+  ret
+L1:
+  irmovq $8, %r8
+  mrmovq (%rdi), %r9
+  addq %r8, %rdi
+  mrmovq (%rdi), %rdi
+  pushq %r9
+  call rsum_list
+  popq %r9
+  addq %r9, %rax
+  ret
+.align 8
+ele1:
+.quad 0x00a
+.quad ele2
+ele2:
+.quad 0x0b0
+.quad ele3
+ele3:
+.quad 0xc00
+.quad 0
+.pos 0x400
+stack:
+
+

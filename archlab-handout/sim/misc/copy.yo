@@ -1,0 +1,41 @@
+0x000:                      | .pos 0x00
+0x000: 30f40004000000000000 | irmovq stack, %rsp
+0x00a: 801400000000000000   | call main
+0x013: 00                   | halt
+0x014:                      | main:
+0x014: 30f74000000000000000 |   irmovq src, %rdi
+0x01e: 30f65800000000000000 |   irmovq dest, %rsi
+0x028: 30f20300000000000000 |   irmovq $3, %rdx
+0x032: 807000000000000000   |   call copy_block
+0x03b: 90                   |   ret
+0x040:                      | .align 8
+                            | # Source block
+0x040:                      | src:
+0x040: 0a00000000000000     | .quad 0x00a
+0x048: b000000000000000     | .quad 0x0b0
+0x050: 000c000000000000     | .quad 0xc00
+                            | # Destination block
+0x058:                      | dest:
+0x058: 1101000000000000     | .quad 0x111
+0x060: 2202000000000000     | .quad 0x222
+0x068: 3303000000000000     | .quad 0x333
+0x070:                      | copy_block:
+0x070: 6333                 |   xorq %rbx, %rbx
+0x072: 6222                 |   andq %rdx, %rdx
+0x074: 30f80800000000000000 |   irmovq $8, %r8
+0x07e: 30fa0100000000000000 |   irmovq $1, %r10
+0x088: 71b600000000000000   |   jle L1
+0x091:                      | loop:
+0x091: 50970000000000000000 |   mrmovq (%rdi), %r9
+0x09b: 6087                 |   addq %r8, %rdi
+0x09d: 40960000000000000000 |   rmmovq %r9, (%rsi)
+0x0a7: 6086                 |   addq %r8, %rsi
+0x0a9: 6393                 |   xorq %r9, %rbx
+0x0ab: 61a2                 |   subq %r10, %rdx
+0x0ad: 769100000000000000   |   jg loop
+0x0b6:                      | L1:
+0x0b6: 2030                 |   rrmovq %rbx, %rax
+0x0b8: 90                   |   ret
+0x400:                      | .pos 0x400
+0x400:                      | stack:
+                            |   

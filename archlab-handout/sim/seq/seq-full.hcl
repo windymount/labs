@@ -33,53 +33,53 @@ wordsig IIRMOVQ	'I_IRMOVQ'
 wordsig IRMMOVQ	'I_RMMOVQ'
 wordsig IMRMOVQ	'I_MRMOVQ'
 wordsig IOPQ	'I_ALU'
-wordsig IJXX	'I_JMP'
-wordsig ICALL	'I_CALL'
-wordsig IRET	'I_RET'
-wordsig IPUSHQ	'I_PUSHQ'
-wordsig IPOPQ	'I_POPQ'
-# Instruction code for iaddq instruction
-wordsig IIADDQ	'I_IADDQ'
+	wordsig IJXX	'I_JMP'
+	wordsig ICALL	'I_CALL'
+	wordsig IRET	'I_RET'
+	wordsig IPUSHQ	'I_PUSHQ'
+	wordsig IPOPQ	'I_POPQ'
+	# Instruction code for iaddq instruction
+	wordsig IIADDQ	'I_IADDQ'
 
-##### Symbolic represenations of Y86-64 function codes                  #####
-wordsig FNONE    'F_NONE'        # Default function code
+	##### Symbolic represenations of Y86-64 function codes                  #####
+	wordsig FNONE    'F_NONE'        # Default function code
 
-##### Symbolic representation of Y86-64 Registers referenced explicitly #####
-wordsig RRSP     'REG_RSP'    	# Stack Pointer
-wordsig RNONE    'REG_NONE'   	# Special value indicating "no register"
+	##### Symbolic representation of Y86-64 Registers referenced explicitly #####
+	wordsig RRSP     'REG_RSP'    	# Stack Pointer
+	wordsig RNONE    'REG_NONE'   	# Special value indicating "no register"
 
-##### ALU Functions referenced explicitly                            #####
-wordsig ALUADD	'A_ADD'		# ALU should add its arguments
+	##### ALU Functions referenced explicitly                            #####
+	wordsig ALUADD	'A_ADD'		# ALU should add its arguments
 
-##### Possible instruction status values                             #####
-wordsig SAOK	'STAT_AOK'	# Normal execution
-wordsig SADR	'STAT_ADR'	# Invalid memory address
-wordsig SINS	'STAT_INS'	# Invalid instruction
-wordsig SHLT	'STAT_HLT'	# Halt instruction encountered
+	##### Possible instruction status values                             #####
+	wordsig SAOK	'STAT_AOK'	# Normal execution
+	wordsig SADR	'STAT_ADR'	# Invalid memory address
+	wordsig SINS	'STAT_INS'	# Invalid instruction
+	wordsig SHLT	'STAT_HLT'	# Halt instruction encountered
 
-##### Signals that can be referenced by control logic ####################
+	##### Signals that can be referenced by control logic ####################
 
-##### Fetch stage inputs		#####
-wordsig pc 'pc'				# Program counter
-##### Fetch stage computations		#####
-wordsig imem_icode 'imem_icode'		# icode field from instruction memory
-wordsig imem_ifun  'imem_ifun' 		# ifun field from instruction memory
-wordsig icode	  'icode'		# Instruction control code
-wordsig ifun	  'ifun'		# Instruction function
-wordsig rA	  'ra'			# rA field from instruction
-wordsig rB	  'rb'			# rB field from instruction
-wordsig valC	  'valc'		# Constant from instruction
-wordsig valP	  'valp'		# Address of following instruction
-boolsig imem_error 'imem_error'		# Error signal from instruction memory
-boolsig instr_valid 'instr_valid'	# Is fetched instruction valid?
+	##### Fetch stage inputs		#####
+	wordsig pc 'pc'				# Program counter
+	##### Fetch stage computations		#####
+	wordsig imem_icode 'imem_icode'		# icode field from instruction memory
+	wordsig imem_ifun  'imem_ifun' 		# ifun field from instruction memory
+	wordsig icode	  'icode'		# Instruction control code
+	wordsig ifun	  'ifun'		# Instruction function
+	wordsig rA	  'ra'			# rA field from instruction
+	wordsig rB	  'rb'			# rB field from instruction
+	wordsig valC	  'valc'		# Constant from instruction
+	wordsig valP	  'valp'		# Address of following instruction
+	boolsig imem_error 'imem_error'		# Error signal from instruction memory
+	boolsig instr_valid 'instr_valid'	# Is fetched instruction valid?
 
-##### Decode stage computations		#####
-wordsig valA	'vala'			# Value from register A port
-wordsig valB	'valb'			# Value from register B port
+	##### Decode stage computations		#####
+	wordsig valA	'vala'			# Value from register A port
+	wordsig valB	'valb'			# Value from register B port
 
-##### Execute stage computations	#####
-wordsig valE	'vale'			# Value computed by ALU
-boolsig Cnd	'cond'			# Branch test
+	##### Execute stage computations	#####
+	wordsig valE	'vale'			# Value computed by ALU
+	boolsig Cnd	'cond'			# Branch test
 
 ##### Memory stage computations		#####
 wordsig valM	'valm'			# Value read from memory
